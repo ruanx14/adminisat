@@ -4,6 +4,7 @@ amarelo:
 #7b8700
 #fdff00
 #505f00
+#bcc900
 
 
 #fdff7e
@@ -12,4 +13,7 @@ amarelo:
 #eaef00
 
 vermelho:
+#dd4f34
 #c90702
+lightcoral
+#740602
