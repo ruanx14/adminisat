@@ -2,25 +2,30 @@ CREATE SCHEMA IF NOT EXISTS `isatadmin` DEFAULT CHARACTER SET utf8;
 USE `isatadmin`;
 
 
+CREATE TABLE IF NOT EXISTS `JobPosition` (
+  idJobPosition INT NOT NULL AUTO_INCREMENT,
+  namePosition VARCHAR(45),
+  PRIMARY KEY (idJobPosition)
+) ENGINE=InnoDB;
+
 CREATE TABLE IF NOT EXISTS `Project` (
   idProject INT NOT NULL AUTO_INCREMENT,
-  projectName VARCHAR(100),
-  projectTime VARCHAR(50),
+  nameProject VARCHAR(100),
+  timeProject VARCHAR(50),
   PRIMARY KEY (idProject)
 ) ENGINE=InnoDB;
 
-
 CREATE TABLE IF NOT EXISTS `Worker` (
-  idWorker INT NOT NULL AUTO_INCREMENT,
+  idWorkers INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(95),
   cpf VARCHAR(14),
-  position VARCHAR(45),
   password VARCHAR(95),
-  idProject INT,
-  PRIMARY KEY (idWorker),
-  FOREIGN KEY (idProject) REFERENCES Project(idProject)
+  Project_idProject INT,
+  JobPosition_idJobPosition INT,
+  PRIMARY KEY (idWorkers),
+  FOREIGN KEY (Project_idProject) REFERENCES Project(idProject),
+  FOREIGN KEY (JobPosition_idJobPosition) REFERENCES JobPosition(idJobPosition)
 ) ENGINE=InnoDB;
-
 
 CREATE TABLE IF NOT EXISTS `User` (
   idUser INT NOT NULL AUTO_INCREMENT,
@@ -42,9 +47,9 @@ CREATE TABLE IF NOT EXISTS `User` (
   nispis VARCHAR(45),
   suscard VARCHAR(45),
   situation VARCHAR(45),
-  Worker_idWorker INT NOT NULL,
+  Worker_idWorkers INT NOT NULL,
   PRIMARY KEY (idUser),
-  FOREIGN KEY (Worker_idWorker) REFERENCES Worker(idWorker)
+  FOREIGN KEY (Worker_idWorkers) REFERENCES Worker(idWorkers)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Address` (
@@ -182,19 +187,31 @@ CREATE TABLE IF NOT EXISTS `UserHasAffiliation` (
   FOREIGN KEY (Affiliation_idAffiliation) REFERENCES Affiliation(idAffiliation)
 ) ENGINE=InnoDB;
 
+INSERT INTO JobPosition (namePosition) VALUES
+('Desenvolvedor'),
+('Diretora'),
+('Assistente Social'),
+('Psicóloga'),
+('Coordenador'),
+('Estagiário');
 
-INSERT INTO Project (projectName, projectTime) VALUES
+INSERT INTO Project (nameProject, timeProject) VALUES
 ('Projeto Dev', '6 meses'),
 ('Projeto Admin', 'X anos'),
 ('Projeto Beta', '1 ano'),
 ('Projeto Alfa', '2 anos'),
 ('Projeto Gama', '3 meses');
 
+INSERT INTO Worker (name, cpf, password, Project_idProject, JobPosition_idJobPosition) VALUES
+('Dev', '032.912.702-07', '$2y$10$rITSqxBS0YgWNHMf5bPaZuHPlnfuS3e9vumDCC48K36cSuLVHQzS6', 1, 1),
+('Admin', '123.123.123-00', '$2y$10$JmDEDkY0AeEU5bfRk1X6nexd3WW3azSB6wFw/.Pr1zegb91YUG9om', 2, 2),
+('Marcia Fernandes', '123.456.789-00', 'senha123', 3, 3),
+('Eliete Jessica', '123.456.789-00', 'senha123', 4, 3),
+('Katiana Ferreira Souza', '123.456.789-00', 'senha123', 4, 4),
+('Monica Silva', '987.654.321-00', 'senha456', 3, 4);
 
-INSERT INTO Worker (name, cpf, position, password, idProject) VALUES
-('Ruan Barroso', '032.912.702-07', 'Desenvolvedor', '$2y$10$rITSqxBS0YgWNHMf5bPaZuHPlnfuS3e9vumDCC48K36cSuLVHQzS6', 1),
-('Admin', '123.123.123-00', 'Diretora', '$2y$10$JmDEDkY0AeEU5bfRk1X6nexd3WW3azSB6wFw/.Pr1zegb91YUG9om', 2),
-('Marcia Fernandes', '123.456.789-00', 'Assistente Social', 'senha123', 3),
-('Eliete Jessica', '123.456.789-00', 'Assistente Social', 'senha123', 4),
-('Katiana Ferreira Souza', '123.456.789-00', 'Psicologa', 'senha123', 4),
-('Monica Silva', '987.654.321-00', 'Psicólogo', 'senha456', 3);
+INSERT INTO Worker (name, cpf, password, Project_idProject, JobPosition_idJobPosition) VALUES
+('Carlos Eduardo', '111.222.333-44', 'senha123', 5, 5), 
+('Fernanda Souza', '555.666.777-88', 'senha123', 3, 6), 
+('Lucas Pereira', '999.888.777-66', 'senha123', 2, 4),  
+('Ana Beatriz', '444.333.222-11', 'senha123', 3, 4);    
