@@ -213,5 +213,5 @@ INSERT INTO Worker (name, cpf, password, Project_idProject, JobPosition_idJobPos
 INSERT INTO Worker (name, cpf, password, Project_idProject, JobPosition_idJobPosition) VALUES
 ('Carlos Eduardo', '111.222.333-44', 'senha123', 5, 5), 
 ('Fernanda Souza', '555.666.777-88', 'senha123', 3, 6), 
-('Lucas Pereira', '999.888.777-66', 'senha123', 2, 4),  
+('Lucas Pereira', '999.888.777-66', 'senha123', 3, 4),  
 ('Ana Beatriz', '444.333.222-11', 'senha123', 3, 4);    
