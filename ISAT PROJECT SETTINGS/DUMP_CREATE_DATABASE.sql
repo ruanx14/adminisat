@@ -16,13 +16,13 @@ CREATE TABLE IF NOT EXISTS `Project` (
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Worker` (
-  idWorkers INT NOT NULL AUTO_INCREMENT,
+  idWorker INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(95),
   cpf VARCHAR(14),
   password VARCHAR(95),
   Project_idProject INT,
   JobPosition_idJobPosition INT,
-  PRIMARY KEY (idWorkers),
+  PRIMARY KEY (idWorker),
   FOREIGN KEY (Project_idProject) REFERENCES Project(idProject),
   FOREIGN KEY (JobPosition_idJobPosition) REFERENCES JobPosition(idJobPosition)
 ) ENGINE=InnoDB;
@@ -47,9 +47,9 @@ CREATE TABLE IF NOT EXISTS `User` (
   nispis VARCHAR(45),
   suscard VARCHAR(45),
   situation VARCHAR(45),
-  Worker_idWorkers INT NOT NULL,
+  Worker_idWorker INT NOT NULL,
   PRIMARY KEY (idUser),
-  FOREIGN KEY (Worker_idWorkers) REFERENCES Worker(idWorkers)
+  FOREIGN KEY (Worker_idWorker) REFERENCES Worker(idWorker)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Address` (
